@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    echo "Please use 'source' or '.' to run $(basename "$0")."
-    return 1
+    echo "Please use 'source $(basename "$0")'"
+    exit 1
 fi
 
 TARGET_DIR="${1:-$(pwd)}"
@@ -29,6 +29,7 @@ fi
 
 if [[ -f "$TARGET_DIR/requirements.txt" ]]; then
     echo "Installing requirements from $TARGET_DIR/requirements.txt ..."
+    # no internet halts next 2 lines
     pip install --upgrade pip
     pip install --upgrade -r "$TARGET_DIR/requirements.txt"
 fi
